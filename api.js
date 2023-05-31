@@ -129,4 +129,36 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// DELETE query to delete a post by its id
+router.delete("/post/:id", async (req, res) => {
+  const postId = req.params.id;
+
+  try {
+    // Supprimer le post de la base de données
+    await Post.findByIdAndDelete(postId);
+
+    res.status(200).json({ message: "Le post a été supprimé avec succès." });
+  } catch (error) {
+    res.status(500).json({
+      error: "Une erreur s'est produite lors de la suppression du post.",
+    });
+  }
+});
+
+// DELETE query to delete an offer by its id
+router.delete("/offer/:id", async (req, res) => {
+  const offerId = req.params.id;
+
+  try {
+    // Supprimer le post de la base de données
+    await Offer.findByIdAndDelete(offerId);
+
+    res.status(200).json({ message: "L'offre a été supprimée avec succès." });
+  } catch (error) {
+    res.status(500).json({
+      error: "Une erreur s'est produite lors de la suppression de l'offre.",
+    });
+  }
+});
+
 module.exports = router;
