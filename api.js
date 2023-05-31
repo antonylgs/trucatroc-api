@@ -123,7 +123,7 @@ router.post("/login", async (req, res) => {
         .json({ message: "L'e-mail ou le mot de passe est incorrect." });
     }
 
-    res.json({ message: "Authentification réussie." });
+    res.json({ message: "Authentification réussie.", id: user._id });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
