@@ -27,7 +27,7 @@ router.get("/posts", async (req, res) => {
   }
 });
 
-// GET query to get a post by its id
+// POST query to create a new user
 router.post("/user", async (req, res) => {
   try {
     const newUser = new User(req.body);
