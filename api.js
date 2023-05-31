@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const Post = require("./models/post");
 const Offer = require("./models/offer");
 const User = require("./models/user");
@@ -96,6 +97,35 @@ router.post("/offer", async (req, res) => {
     res.json(newOffer);
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// POST query to login a user
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Search for user by email
+    const user = await User.findOne({ email });
+
+    // Check if user exists
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "L'e-mail ou le mot de passe est incorrect." });
+    }
+
+    // Check if password is correct
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({ message: "L'e-mail ou le mot de passe est incorrect." });
+    }
+
+    res.json({ message: "Authentification réussie." });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
