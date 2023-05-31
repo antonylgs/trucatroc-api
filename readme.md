@@ -1,3 +1,11 @@
+Install MongoDB on MacOS following this page
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/
+
+Start MongoDB, and use mongosh to create the database with use your-database-name
+
+Put your database url in a .env file at the base of the project
+DB_URL=mongodb://127.0.0.1:27017/your-database-name
+
 ###Create a user
 POST /user
 {
